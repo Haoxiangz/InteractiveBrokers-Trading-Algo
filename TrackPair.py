@@ -230,20 +230,36 @@ class startInvesting():
             print(f"Change from last trade day: {globalDict[i][9]:.4f} OR {globalDict[i][7]:.4f}%. \n")
         return
 
+    def recordHistoryClose():
+        global clientId
+        mycontract = Contract()
+        mycontract.symbol = "V"
+        mycontract.secType = "STK"
+        mycontract.exchange = "SMART"
+        mycontract.currency = "USD"
+
+        app = TestApp()
+        app.connect("127.0.0.1", port, clientId)
+        sleep(3)
+        app.reqHistoricalData(0, mycontract, "", "6 months", "1 day", "TRADES", 1, 1, 0, [])
+        app.run()
+
 
 def main():
     
-    startInvesting.buildScanner()
+    # startInvesting.buildScanner()
 
-    startInvesting.printScanner()
+    # startInvesting.printScanner()
     
-    startInvesting.buildHistorical()
+    # startInvesting.buildHistorical()
     
-    startInvesting.calcChange()
+    # startInvesting.calcChange()
     
-    startInvesting.printTopDif()
+    # startInvesting.printTopDif()
 
-    startInvesting.bestBuys()
+    # startInvesting.bestBuys()
+
+    startInvesting.recordHistoryClose()
 
 
 if __name__ == "__main__":
