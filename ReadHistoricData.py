@@ -22,22 +22,19 @@ class TestApp(EClient, EWrapper):
     # 2. Making six or more historical data requests for the same Contract, Exchange and Tick Type within two seconds.
     # 3. Making more than 60 requests within any ten minute period.
     def msgLoopRec(self):
-        sleep(2)
+        # sleep(2)
+        return
     def nextValidId(self, orderId: int):
         self.nextOrderId = orderId
         print("nextValidId triggered to be: " + str(orderId))
-    def tickPrice(self, reqId, tickType, price, attrib):
-        print(f"tickPrice. reqId: {reqId}, tickType: {TickTypeEnum.to_str(tickType)}, price: {price}, attribs: {attrib}")
-    def tickSize(self, reqId, tickType, size):
-        print(f"tickSize. reqId: {reqId}, tickType: {TickTypeEnum.to_str(tickType)}, size: {size}")
-    
+
     def historicalData(self, reqId, bar):
         global df
         new_row = pd.DataFrame([[bar.date,bar.open,bar.high,bar.low,bar.close,bar.volume,bar.average,bar.barCount]],columns=columnNames)
         df = pd.concat([df, new_row], ignore_index=True)
         # print(f"Historical Data: {bar}")
     def historicalDataEnd(self, reqId, start, end):
-        df.to_csv(fileName, mode='a', columns=columnNames, header=False, index=False)
+        df.to_csv(fileName, columns=columnNames, index=False)
         print(f"End of HistoricalData")
         print(f"Start: {start}, End: {end}")
         self.disconnect()
