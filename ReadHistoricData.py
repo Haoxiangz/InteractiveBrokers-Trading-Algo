@@ -59,7 +59,7 @@ def main():
     qqq.secType = "STK"
     qqq.exchange = "SMART"
     qqq.currency = "USD"
-    # datesRequested = getWeekOf(20230925) + getWeekOf(20231002)
+
     datesRequested = getWeekOf(20231002)
 
     idx = 0
