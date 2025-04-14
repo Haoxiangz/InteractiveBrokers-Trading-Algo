@@ -24,6 +24,8 @@ base_options.add_argument("--disable-dev-shm-usage")
 base_options.add_argument("--window-size=1920,1080")  # Set window size
 base_options.add_argument("--disable-blink-features=AutomationControlled")  # Disable automation flags
 
+rul = 'http://localhost:4444'
+
 class Scraper:
     def __init__(self):
         return
@@ -32,7 +34,7 @@ class Scraper:
         time.sleep(random.uniform(1, 3))  # Random delay
         chrome_options = base_options
         chrome_options.add_argument(f'user-agent={random.choice(user_agents)}')
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+        driver = webdriver.Remote(command_executor=rul, options=chrome_options)
         driver.get(url)
         page_source = driver.page_source
         driver.quit()

@@ -1,3 +1,5 @@
 # Exported files #
 ##################
 *.csv
+**/.vscode
+**/__pycache__
